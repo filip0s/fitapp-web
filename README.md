@@ -1,85 +1,84 @@
-# FitApp
+# FitApp 🏋️‍♂️
 
-## Krátce na úvod
+## About
+Minimalistic web application written in Python with use of Flask microframework.
+Main purpose of this app is to log progress in working out and healthy lifestyle in general.
+Application is part of semester project for Python course on my university.
 
-FitApp je minimalistická webová aplikace vytvořená pomoci programovacího jazyku Python a mikroframeworku Flask, která
-slouží pro zaznamenávání pokroků ve cvičení a zdravém životním stylu obecně.
+## Used technologies
+- **Front-end** - HTML, CSS, Bootstrap 5
+- **Back-end** - Python, Flask, Matplotlib
+- **Database** - SQLite
 
-## Úvodní nastavení
+## Features
+* User system
+* Logging physical attributes
+  * Weight
+  * Height
+* Logging lifts
+* Running logs
+* Progress visualization with graphs
 
-### Flask
+## Application setup
 
-Aplikace je postavena v programovacím jazyce [Python v3.9](https://www.python.org/downloads/) a využívá framework
-[Flask](https://flask.palletsprojects.com/en/1.1.x/), který lze nainstalovat pomocí příkazu:
+### Prerequisites
+* [Python 3](https://www.python.org/downloads/) and [Git](https://git-scm.com/download/linux) installed on the system
+
+
+### Downloading the project
 
 ```shell
-pip install flask
+git clone github.com/filip0s/fitapp-web
+cd fitapp-web
+python -m venv /venv # create virtual environment so the dependencies won't clutter your system
+source /venv/bin/activate # activate virtual environment
+pip install -r requirements.txt # installing dependencies
+cd fitapp; cp .env_example .env # Creates .env file and fills it with placeholder values
 ```
 
-Další potřebné knihovny jsou:
-
-- ```Flask-SQLAlchemy```
-
-Na systémech založených na UNIXu, jako je například Linux nebo MacOS, je nejprve potřeba nastavit systémové proměnné
-pomocí příkazů:
-
+### Setting envrionment variables
+1. In the `.env` file created in previous 
+step, fill corresponding values to keys
+    * for example `FITAPP_SECRET_KEY=my-super-secret-password`
+2. Before launching the application you need to setup two additional
+environment variables
 ```shell
 export FLASK_APP=fitapp
-export FLASK_ENV=development
+export FLASK_ENV=development # Export this one only if you want to run application in development mode
 ```
 
-poté by mělo být možné spustit lokální server pomocí příkazu:
+### Running local server
+* Finally you can start local server with
 
 ```shell
 flask run
 ```
+* The application is not yet fully functional because database is not migrated yet.
+* You need to do this step before migration, because database file `fitapp/fitapp.db` will be created on the first run
+of the application
 
-### SCSS
-
-Ke kompilaci SCSS na standardní CSS je potřeba mít nainstalovaný nástroj [Node.js](https://nodejs.org/en/), u kterého
-využijeme jeho správce balíčků ```npm```.
-
-Pro doinstalování potřebných závislostí ke kompilování SCSS a provádění dalších úkolů, o které se stadá NPM, stačí zadat
-příkaz:
+### Database migration
+* To migrate the database you will need to run following commands
 
 ```shell
-npm ci
+flask db init
+flask db migrate
+flask db upgrade
 ```
 
-Poté lze aktivovat "watcher", který bude překompiluje dané soubory při každé změně
+* If the databases are succesfully migrated but no values are stored inside of them (especially in the
+`exercies` and `exercise_type` tables), manually migrate the values inside the `migrations/exercises.sql` file with the help of any program which offers you console to the database (e.g. [SQLite browser](https://github.com/sqlitebrowser/sqlitebrowser))
+* Now finally you should be able to fully run the application.
 
-```shell
-sass --watch scss/:fitapp/static/css/
-```
 
-- ```scss/``` - zdrojová složka
-- ```:``` - oddělovač
-- ```fitapp/static/css/``` - cílová složka
 
-## Struktura projektu
 
-```
-fitapp-web
-|- fitapp (balíček)
-    |- __init__.py 
-    |- /static
-        |- /css
-            |- main.css
-    |- /templates
-        |- base_template.html
-        |- home.html
-|- /scss
-|- .GITIGNORE
-|- README.md
-|- package.json
-|- package-lock.json
-```
 
-- ```fitapp-web``` - kořenový adresář projektu
-- ```fitapp``` - adresář s balíčkem
-  - základní soubory, které se dají použít pro deployment
-- ```/static/css``` - adresář s kaskádovými styly
-  - ```main.css``` - hlavní stylovací soubor
-- ```/templates``` - adresář se šablonami pro vykreslování stránek
-    - ```base_template.html``` - základní šablona, ze které vychází všechny ostatní šablony
-    - ```home.html``` - domovská stránka
+
+
+
+
+
+
+
+

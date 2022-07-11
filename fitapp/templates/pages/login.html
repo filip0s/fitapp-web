@@ -1,0 +1,44 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h2>Přihlášení</h2>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            <!--Uživatelské jméno-->
+            {{ form.username.label(class="form-label") }}
+            {% if form.username.errors %}
+                <ul>
+                    {% for error in forn.username.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {{ form.username(class="form-control") }}
+        </div>
+
+        <!--Heslo-->
+        <div class="mb-3">
+            {{ form.password.label(class="form-label") }}
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endif %}
+            {{ form.password(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.remember_user(class="form-check-input") }}
+            {{ form.remember_user.label(class="form-check-label") }}
+        </div>
+
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for("home_page") }}" class="btn btn-outline-danger">Zrušit</a>
+    </form>
+
+    <div class="mt-4 alert alert-secondary" role="alert">
+        Nemáte účet? Nevadí, můžete se zaregistrovat <a href="{{ url_for("register_page") }}">zde</a>
+    </div>
+
+{% endblock %}

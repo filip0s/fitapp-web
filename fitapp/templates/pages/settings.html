@@ -1,0 +1,67 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+    <h2>Nastavení</h2>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+
+        <!--Křestní jmnéno-->
+        <div class="row">
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.first_name.label(class="form-label") }}
+                {% if form.first_name.errors %}
+                    <ul>
+                        {% for error in form.first_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {{ form.first_name(class="form-control") }}
+            </div>
+
+            <!--Příjmení-->
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.last_name.label(class="form-label") }}
+                {% if form.last_name.errors %}
+                    <ul>
+                        {% for error in form.last_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {{ form.last_name(class="form-control") }}
+            </div>
+        </div>
+        <!--Datum narození-->
+        <div class="mb-3">
+            {{ form.date_of_birth.label(class="form-label") }}
+            {% if form.date_of_birth.errors %}
+                {% for error in form.date_of_birth.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+                {{ form.date_of_birth(class="form-control is-invalid") }}
+            {% else %}
+                {{ form.date_of_birth(class="form-control") }}
+            {% endif %}
+        </div>
+
+
+        <!--Veřejný profil-->
+        <div class="mb-3">
+            {{ form.public_profile(class="form-check-input") }}
+            {{ form.public_profile.label(class="form-check-label") }}
+        </div>
+
+
+        <!--Tlačítko pro odeslání-->
+        <div class="alert alert-info">Pro změnu hesla <a class="alert-link"
+                                                         href="{{ url_for("change_password_page") }}">klikněte zde</a>.
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for("home_page") }}" class="btn btn-outline-danger">Zrušit</a>
+    </form>
+{% endblock %}

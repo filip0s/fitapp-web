@@ -1,0 +1,162 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h2>Registrace</h2>
+    <!--TODO: Nějaké uspořádání registrační stránky-->
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <!--Uživatelské jméno-->
+        <div class="mb-3">
+            {{ form.username.label(class="form-label") }}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+                {{ form.username(class="form-control is-invalid") }}
+            {% else %}
+                {{ form.username(class="form-control") }}
+            {% endif %}
+
+        </div>
+
+        <!--Křestní jmnéno-->
+        <div class="row">
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.first_name.label(class="form-label") }}
+                {% if form.first_name.errors %}
+                    <ul>
+                        {% for error in form.first_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {{ form.first_name(class="form-control") }}
+            </div>
+
+            <!--Příjmení-->
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.last_name.label(class="form-label") }}
+                {% if form.last_name.errors %}
+                    <ul>
+                        {% for error in form.last_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {{ form.last_name(class="form-control") }}
+            </div>
+        </div>
+        <!--e-mail-->
+        <div class="mb-3">
+            {{ form.email.label(class="form-label") }}
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+                {{ form.email(class="form-control is-invalid") }}
+            {% else %}
+                {{ form.email(class="form-control") }}
+            {% endif %}
+
+        </div>
+
+        <!--Datum narození-->
+        <div class="mb-3">
+            {{ form.date_of_birth.label(class="form-label") }}
+            {% if form.date_of_birth.errors %}
+                {% for error in form.date_of_birth.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+                {{ form.date_of_birth(class="form-control is-invalid") }}
+            {% else %}
+                {{ form.date_of_birth(class="form-control") }}
+            {% endif %}
+        </div>
+
+        <div class="row">
+            <!--Heslo-->
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.password.label(class="form-label") }}
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                    {{ form.password(class="form-control is-invalid") }}
+                {% else %}
+                    {{ form.password(class="form-control") }}
+                {% endif %}
+            </div>
+
+            <!--Potvrzení hesla-->
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.repeat_password.label(class="form-label") }}
+                {% if form.repeat_password.errors %}
+                    {% for error in form.repeat_password.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                    {{ form.repeat_password(class="form-control is-invalid") }}
+                {% else %}
+                    {{ form.repeat_password(class="form-control") }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <!--Výška-->
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.height.label(class="form-label") }}
+                {% if form.height.errors %}
+                    {% for error in form.height.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                    {{ form.height(class="form-control is-invalid") }}
+                {% else %}
+                    {{ form.height(class="form-control") }}
+                {% endif %}
+            </div>
+
+            <!--Hmotnost-->
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.weight.label(class="form-label") }}
+                {% if form.weight.errors %}
+                    {% for error in form.weight.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                    {{ form.weight(class="form-control is-invalid") }}
+                {% else %}
+                    {{ form.weight(class="form-control") }}
+                {% endif %}
+            </div>
+        </div>
+
+        <!--Veřejný profil-->
+        <div class="mb-3">
+            {{ form.public_profile(class="form-check-input") }}
+            {{ form.public_profile.label(class="form-check-label") }}
+        </div>
+
+        <!--Tlačítko pro odeslání-->
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for("home_page") }}" class="btn btn-outline-danger">Zrušit</a>
+    </form>
+
+
+    <div class="mt-4 alert alert-secondary" role="alert">Máte již účet? Přihlaste se <a
+            href="{{ url_for("login_page") }}">zde</a>!
+    </div>
+{% endblock %}

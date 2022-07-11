@@ -1,0 +1,60 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h2 class="display-1">{{ user.username }}</h2>
+    {% if user.public_profile or current_user.id == user.id %}
+        {# Veřejný profil #}
+        {% if user.first_name != '' %}
+            <p class="display-6 text-muted">({{ user.first_name }} {{ user.last_name }})</p>
+        {% endif %}
+
+        <div class="row">
+            <!--Karta s hmotností-->
+            <div class="card col-md-4 col-sm-6">
+                <div class="card-body">
+                    <p class="display-4">{{ user_attributes["weight"] }} <span class="display-6">kg</span></p>
+                    <h5 class="card-title">Aktuální hmotnost</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+
+            <!--Karta s výškou-->
+            <div class="card col-md-4 col-sm-6">
+                <div class="card-body">
+                    <p class="display-4">{{ user_attributes["height"] }} <span class="display-6">cm</span></p>
+                    <h5 class="card-title">Aktuální výška</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+
+            <!--Karta s běháním-->
+            {% if user_attributes["time_per_km"] != "0:00" %}
+                <div class="card col-md-4 col-sm-6">
+                    <div class="card-body">
+                        <p class="display-4">{{ user_attributes["time_per_km"] }} <span class="display-6">min</span></p>
+                        <h5 class="card-title">Čas/1 km</h5>
+                        <p class="card-text">Průměrný čas za který uživatel uběhl 1 km při posledním běhu</p>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!--Karta s nejsilnějším cvikem-->
+            {% if user_attributes["strongest_lift"]["one_rep_max"] %}
+                <div class="card col-md-4 col-sm-6">
+                    <div class="card-body">
+                        <p class="display-4">{{ user_attributes["strongest_lift"]["one_rep_max"] }} <span
+                                class="display-6">kg</span></p>
+                        <h5 class="card-title">Nejvyšší maximální váha na cviku</h5>
+                        <p class="card-text">Uživatelova nejvyšší přednost je
+                            cvik {{ user_attributes["strongest_lift"]["exercise"] }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        {# Soukromý profil #}
+        <div class="alert alert-warning">Tento uživatel má soukromý profil</div>
+    {% endif %}
+
+{% endblock %}

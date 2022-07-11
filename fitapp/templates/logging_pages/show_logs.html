@@ -1,0 +1,30 @@
+{% extends "base_template.html" %}
+{% block content %}
+    <h2>{{ title }} uživatele {{ current_user.username }}</h2>
+    {% if logs %}
+        {{ plot_tag }}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Hodnota</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log[0] }}</td>
+                    <td>{{ log[1] }} {{ unit }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">Uživatel {{ current_user.username }} zatím nemá žádné záznamy týkající se této
+            statistiky
+            <br> Pro přidání navigaci klikněte na "Přidat záznam" a zvolte příslušný atribut nebo statistiku
+        </div>
+    {% endif %}
+
+
+{% endblock %}

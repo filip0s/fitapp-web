@@ -1,0 +1,49 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+    <h2>Přidat cvik pro uživatele {{ current_user.username }}</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="mb-3 col-sm-12 col-md-6">
+                {{ form.exercise.label(class="form-label") }}
+                {% if form.exercise.errors %}
+                    <ul>
+                        {% for error in form.exercise.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {{ form.exercise(class="form-select") }}
+            </div>
+
+
+            <div class="mb-3 col-sm-6 col-md-3 col-lg-2">
+                {{ form.weight.label(class="form-label") }}
+                {% if form.weight.errors %}
+                    <ul>
+                        {% for error in form.weight.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {{ form.weight(class="form-control") }}
+            </div>
+
+            <div class="mb-3 col-sm-6 col-md-3 col-lg-2">
+                {{ form.repetitions.label(class="form-label") }}
+                {% if form.repetitions.errors %}
+                    <ul>
+                        {% for error in form.repetitions.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {{ form.repetitions(class="form-control") }}
+            </div>
+        </div>
+
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for("dashboard_page") }}" class="btn btn-outline-danger">Zrušit</a>
+    </form>
+{% endblock %}

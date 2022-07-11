@@ -1,0 +1,26 @@
+{% extends "base_template.html" %}
+{% block content %}
+    <h2>Přidat záznam pro uživatele {{ current_user.username }}</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3 col-md-4">
+            {{ form.value.label }}
+            {% if form.value.errors %}
+                {% for error in form.value.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+                {{ form.value(class="form-control is-invalid") }}
+            {% else %}
+                {{ form.value(class="form-control") }}
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+            <a href="{{ url_for("dashboard_page") }}" class="btn btn-outline-danger">Zrušit</a>
+        </div>
+    </form>
+{% endblock %}

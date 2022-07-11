@@ -1,0 +1,56 @@
+{% extends "base_template.html" %}
+{% block content %}
+    <h2>Přidat běh pro uživatele {{ current_user.username }}</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                {{ form.date.label }}
+                {% if form.date.errors %}
+                    {% for error in form.date.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                    {{ form.date(class="form-control is-invalid") }}
+                {% else %}
+                    {{ form.date(class="form-control") }}
+                {% endif %}
+            </div>
+
+            <div class="mb-3 col-md-4">
+                {{ form.time.label }}
+                {% if form.time.errors %}
+                    {% for error in form.time.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                    {{ form.time(class="form-control is-invalid") }}
+                {% else %}
+                    {{ form.time(class="form-control") }}
+                {% endif %}
+            </div>
+
+            <div class="mb-3 col-md-4">
+                {{ form.distance.label }}
+                {% if form.distance.errors %}
+                    {% for error in form.distance.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                    {{ form.distance(class="form-control is-invalid") }}
+                {% else %}
+                    {{ form.distance(class="form-control") }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+            <a href="{{ url_for("dashboard_page") }}" class="btn btn-outline-danger">Zrušit</a>
+        </div>
+    </form>
+{% endblock %}

@@ -1,4 +1,4 @@
-# FitApp 🏋️‍♂️
+# 🏋️‍♂️ FitApp 
 
 ## About
 Minimalistic web application written in Python with use of Flask microframework.
@@ -71,14 +71,8 @@ flask db upgrade
 * Now finally you should be able to fully run the application.
 
 
-
-
-
-
-
-
-
-
-
-
-
+## Screenshots
+![Homepage](resources/homepage-screenshot.png)
+![Dashboard](resources/dashboard-screenshot.png)
+![Lift logging page](resources/lift-log-screenshot.png)
+![Exercise overview page](resources/squat-log-screenshot.png)
